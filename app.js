@@ -10,6 +10,7 @@ const shopRoutes = require("./routes/shop");
 
 const app = express();
 app.use(boydParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/admin", adminRoutes);
