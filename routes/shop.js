@@ -4,8 +4,16 @@ const rootDir = require("../utils/path");
 
 const router = express.Router();
 
+// Import Data Admin / Routes Admin
+const adminData = require("./admin");
+
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "/views/shop.html"));
+  const productData = adminData.product;
+  res.render("shop", {
+    docTitle: "Shop",
+    product: productData,
+    path: "/",
+  });
 });
 
-module.exports = router;
+exports.routes = router;
