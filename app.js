@@ -9,18 +9,27 @@ const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 const app = express();
+
+// PUG
+app.set("view engine", "pug");
+app.set("views", "views");
+
 app.use(boydParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-app.use("/admin", adminRoutes);
-app.use(shopRoutes);
+app.use("/admin", adminRoutes.routes);
+app.use(shopRoutes.routes);
 
 // Error Routes
 app.use((req, res, next) => {
   // res.status(404).send("<h1>Page Not Found</h1>");
 
-  res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
+  // res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
+
+  res.status(404).render("404", {
+    pageTitle: "404 Not Found!",
+  });
 });
 
 // Server
