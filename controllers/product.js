@@ -1,13 +1,10 @@
-const product = [];
-
-exports.products = product;
+const Products = require("../models/product");
 
 exports.addNewProduct = (req, res, next) => {
   console.log("req.body =>", req.body);
 
-  product.push({
-    title: req.body.title,
-  });
+  const product = new Products(req.body.title);
+  product.save();
 
   res.redirect("/");
 };
