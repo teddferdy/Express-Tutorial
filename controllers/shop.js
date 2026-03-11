@@ -1,11 +1,12 @@
-const controllerProduct = require("./product");
+const Product = require("../models/product");
 
 exports.renderShop = (req, res, next) => {
-  const productData = controllerProduct.products;
+  // const product = new Product();
+  const getDataProduct = Product.fetchAll();
 
   res.render("shop", {
     pageTitle: "Shop",
-    prods: productData,
+    prods: getDataProduct,
     path: "/",
   });
 };

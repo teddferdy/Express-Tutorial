@@ -15,7 +15,6 @@ const { ErrorController } = require("./controllers/404");
 // Routes
 const adminData = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
-const errorRoutes = require("./routes/404");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
