@@ -1,38 +1,30 @@
-const express = require("express");
-const boydParser = require("body-parser");
-
-// Path
 const path = require("path");
 
-// Import Routes
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-// PUG
-app.set("view engine", "pug");
+// Set View Engine
+app.set("view engine", "ejs");
 app.set("views", "views");
 
-app.use(boydParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+// Error Controller
+const { ErrorController } = require("./controllers/404");
 
 // Routes
-app.use("/admin", adminRoutes.routes);
+const adminData = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const errorRoutes = require("./routes/404");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
+// Main
+app.use("/admin", adminData.routes);
 app.use(shopRoutes.routes);
 
 // Error Routes
-app.use((req, res, next) => {
-  // res.status(404).send("<h1>Page Not Found</h1>");
+app.use(ErrorController);
 
-  // res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
-
-  res.status(404).render("404", {
-    pageTitle: "404 Not Found!",
-  });
-});
-
-// Server
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000...");
-});
+app.listen(3000);

@@ -25,6 +25,10 @@ Project ini dibangun menggunakan teknologi berikut:
   Development tool untuk otomatis restart server saat file berubah.
   https://nodemon.io/
 
+- **Pug ^3.0.3**
+  Development tool untuk Render Data Dinamis.
+  https://pugjs.org/
+
 ## Node Version
 
 Project ini menggunakan:
@@ -69,14 +73,23 @@ http://localhost:3000
 
 ```
 .
+├── controllers
+│   └── ...
+│
+├── public
+│   └── css
+│        └── ...
+│
 ├── routes
-│   └── index.js
+│   └── ...
 │
 ├── utils
-│   └── helper.js
+│   └── ....
 │
 ├── views
-│   └── index.html
+│   └── Layouts
+│         └── main-layouts
+│   └── ....
 │
 ├── app.js
 └── package.json
