@@ -7,7 +7,7 @@ const app = express();
 
 // Set View Engine
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views", path.join(__dirname, "views"));
 
 // Error Controller
 const { ErrorController } = require("./controllers/404");

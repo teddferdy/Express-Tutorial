@@ -18,10 +18,14 @@ const fetchingAllData = (cb) => {
 };
 
 module.exports = class Product {
-  constructor(t) {
-    this.title = t;
+  constructor({ title, imageUrl, description, price }) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.description = description;
   }
 
+  // Add / Save
   save() {
     fetchingAllData((products) => {
       products.push(this);
@@ -31,6 +35,19 @@ module.exports = class Product {
     });
   }
 
+  // Delete
+  static deleteDataByName(name) {
+    fetchingAllData((data) => {
+      const filterData = data.filter((items) => items.title !== name);
+      fs.writeFile(p, JSON.stringify(filterData), (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    });
+  }
+
+  // Fetch All
   static fetchAll(cb) {
     fetchingAllData(cb);
   }
